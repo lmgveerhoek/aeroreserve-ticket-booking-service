@@ -1,0 +1,9 @@
+version: '3'
+services:
+  aeroreserve-booking-service:
+    # image: ${DOCKER_REGISTRY_URL}/aeroreserve-booking-service:${BOOKING_SERVICE_IMAGE_VERSION}
+    build: .
+    container_name: aeroreserve-booking-service
+    restart: unless-stopped
+    ports:
+      - 8080:8080
