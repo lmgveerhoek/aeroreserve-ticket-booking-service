@@ -34,6 +34,7 @@ public class TicketBookingRestController {
   @PutMapping("/ticket")
   public ResponseEntity<BookTicketResponse> bookTicket(ServerWebExchange exchange) {
     String simulateBookingFailure = exchange.getRequest().getQueryParams().getFirst("simulateBookingFailure");
+    System.out.print("Put ticket reached\n");
     
     // This would be best generated even in the client to allow idempotency!
     BookTicketResponse response = new BookTicketResponse();

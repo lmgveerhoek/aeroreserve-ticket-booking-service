@@ -29,15 +29,27 @@ public class PaymentAmqpReceiver {
   @RabbitListener(queues = "paymentResponse")
   @Transactional  
   public void messageReceived(String paymentResponseString) throws JsonMappingException, JsonProcessingException {
-    PaymentResponseMessage paymentResponse = objectMapper.readValue(paymentResponseString, PaymentResponseMessage.class);
-    logger.info("Received " + paymentResponse);
+    // Deserialize the message
+    try {
+        PaymentResponseMessage paymentResponse = objectMapper.readValue(paymentResponseString, PaymentResponseMessage.class);
+
+        logger.info("Received " + paymentResponse);
+        logger.info("SUCCESSFULLY DECODED JSON");
+        
+        // Route message to workflow
+        client.newPublishMessageCommand() //
+          .messageName("msg-payment-received") //
+          .correlationKey(paymentResponse.paymentRequestId) //
+          .variables(Collections.singletonMap("paymentConfirmationId", paymentResponse.paymentConfirmationId)) //
+          .send().join();
+    } catch (JsonProcessingException e) {
+        // Handle the exception
+        logger.info("DECODING FAILED");
+        logger.error("Error deserializing payment response JSON: " + e.getMessage());
+        // // Optionally, you can log the stack trace for more detailed debugging
+        // e.printStackTrace();
+    }
     
-    // Route message to workflow
-    client.newPublishMessageCommand() //
-      .messageName("msg-payment-received") //
-      .correlationKey(paymentResponse.paymentRequestId) //
-      .variables(Collections.singletonMap("paymentConfirmationId", paymentResponse.paymentConfirmationId)) //
-      .send().join();
   }
   
   public static class PaymentResponseMessage {

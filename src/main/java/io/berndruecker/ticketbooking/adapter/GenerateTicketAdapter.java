@@ -6,6 +6,7 @@ import io.camunda.zeebe.spring.client.annotation.JobWorker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -20,7 +21,8 @@ public class GenerateTicketAdapter {
 
   // This should be of course injected and depends on the environment.
   // Hard coded for simplicity here
-  public static String ENDPOINT = "http://localhost:3000/ticket";
+  @Value("${ticket-generation-service-endpoint}")
+  public static String ENDPOINT;
 
   @Autowired
   private RestTemplate restTemplate;
