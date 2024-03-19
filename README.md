@@ -5,7 +5,7 @@
 Generate new .jar files using: 
 
 ```
-mvn package -Pbeanstalk
+mvn clean package spring-boot:repackage
 ```
 Then deploy using: 
 
