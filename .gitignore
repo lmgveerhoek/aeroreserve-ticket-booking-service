@@ -3,8 +3,3 @@
 /target/maven-archiver
 /target/maven-status
 /target/test-classes
-
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
