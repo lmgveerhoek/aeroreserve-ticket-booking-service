@@ -21,8 +21,8 @@ public class GenerateTicketAdapter {
 
   // This should be of course injected and depends on the environment.
   // Hard coded for simplicity here
-  @Value("${ticket-generation-service-endpoint}")
-  private String endpoint;
+  // @Value("${ticket-generation-service-endpoint}")
+  private String endpoint = "https://c6baqfhrn9.execute-api.eu-north-1.amazonaws.com/Prod/ticket";
 
   @Autowired
   private RestTemplate restTemplate;
