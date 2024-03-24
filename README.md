@@ -1,8 +1,4 @@
-# AeroReserve Seat Reservation Service
-
-This is the README file for the AeroReserve app project. This will help you understand how to set up the application architecture with all the needed services.
-
-# README
+# AeroReserve Ticket Booking Service
 
 This repository contains the source code for the ticket booking service, which is a Java Spring Boot application.
 
